@@ -1,14 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BombExplosionScript : MonoBehaviour {
 
 	public bool isActive = false;
+	private List<GameObject> collidedBlock = new List<GameObject>();
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.gameObject.tag == "Block" && isActive) {
-			col.gameObject.GetComponent<BlockScript>().health = 0;
+		if (col.gameObject.tag == "Block") {
+			collidedBlock.Add(col.gameObject);
+		}
+	}
+
+	void onTriggerExit2D(Collider2D col)
+	{
+		if (col.gameObject.tag == "Block") {
+			collidedBlock.Remove(col.gameObject);
 		}
 	}
 
@@ -20,11 +29,11 @@ public class BombExplosionScript : MonoBehaviour {
 		}
 	}
 
-	IEnumerator DestroyObject()
+	void DestroyObject()
 	{
-		isActive = false;
-		yield return new WaitForSeconds (0.2f);
-		Destroy (gameObject);
+		foreach (GameObject block in collidedBlock) {
+			Destroy(block);
+		}
 		Destroy (transform.parent.gameObject);
 	}
 	
