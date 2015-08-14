@@ -1,18 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BombScript.cs">
     <Files>
-      <File FileName="Assets/Scripts/BlockScript.cs" Line="6" Column="26" />
-      <File FileName="Assets/Scripts/BulletScript.cs" Line="31" Column="25" />
-      <File FileName="Assets/Scripts/PlayerScript.cs" Line="18" Column="33" />
-      <File FileName="Assets/Scripts/BlockDestroyerScript.cs" Line="21" Column="2" />
+      <File FileName="Assets/Scripts/BlockScript.cs" Line="13" Column="4" />
+      <File FileName="Assets/Scripts/BulletScript.cs" Line="30" Column="39" />
+      <File FileName="Assets/Scripts/PlayerScript.cs" Line="29" Column="46" />
+      <File FileName="Assets/Scripts/BombScript.cs" Line="24" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="BlockDestroyTesterScript.cs" selected="True" />
+              <Node name="BombScript.cs" selected="True" />
             </Node>
           </Node>
         </State>
