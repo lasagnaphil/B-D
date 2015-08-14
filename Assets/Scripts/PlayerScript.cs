@@ -9,10 +9,12 @@ public class PlayerScript : MonoBehaviour {
 	public float maxSpeed = 50f;
 	public float jumpForce = 1000f;
 	public Transform platformCheck;
-
 	private bool onPlatform = false;
 	//private Animator anim;
 	private Rigidbody2D rb2d;
+
+	public GameObject bulletPrefab;
+	public int shootDirection = 1;
 
 	void Awake()
 	{
@@ -28,11 +30,21 @@ public class PlayerScript : MonoBehaviour {
 		{
 			jump = true;
 		}
+		if (Input.GetButtonDown ("Fire1"))
+		{
+			GameObject bullet;
+			bullet = Instantiate (bulletPrefab, rb2d.transform.position, Quaternion.identity) as GameObject;
+			bullet.GetComponent<BulletScript>().direction = shootDirection;
+		}
 	}
 
 	void FixedUpdate ()
 	{
 		float h = Input.GetAxis ("Horizontal");
+		if (h > 0)
+			shootDirection = 1;
+		else if (h < 0)
+			shootDirection = -1;
 		//anim.SetFloat ("Speed", Mathf.Abs (h));
 		if (h * rb2d.velocity.x < maxSpeed)
 			rb2d.AddForce (Vector2.right * h * moveForce);
