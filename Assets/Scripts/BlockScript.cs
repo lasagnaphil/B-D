@@ -8,7 +8,8 @@ public class BlockScript : MonoBehaviour {
 	void Update()
 	{
 		if (health <= 0) {
-			Destroy(gameObject);
+			DestroyObject(gameObject);
+			Debug.Log ("block destroyed");
 		}
 	}
 }

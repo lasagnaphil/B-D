@@ -5,7 +5,8 @@ public class BulletScript : MonoBehaviour {
 
 	public float speed = 10.0f;
 	public float initialScale;
-	[HideInInspector] public int direction = 1;
+	[HideInInspector] public int directionX = 1;
+	[HideInInspector] public int directionY = 0;
 
 	private Rigidbody2D rb2d;
 
@@ -18,7 +19,7 @@ public class BulletScript : MonoBehaviour {
 
 	void Update()
 	{
-		rb2d.velocity = new Vector2 (speed * direction, 0);
+		rb2d.velocity = new Vector2 (speed * directionX, speed * directionY);
 		//Vector3 theScale = transform.localScale;
 		//theScale.x = direction * initialScale;
 		//transform.localScale = theScale;

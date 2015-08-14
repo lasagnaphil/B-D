@@ -14,7 +14,8 @@ public class PlayerScript : MonoBehaviour {
 	private Rigidbody2D rb2d;
 
 	public GameObject bulletPrefab;
-	public int shootDirection = 1;
+	public int shootDirectionX = 1;
+	public int shootDirectionY = 1;
 
 	void Awake()
 	{
@@ -34,7 +35,9 @@ public class PlayerScript : MonoBehaviour {
 		{
 			GameObject bullet;
 			bullet = Instantiate (bulletPrefab, rb2d.transform.position, Quaternion.identity) as GameObject;
-			bullet.GetComponent<BulletScript>().direction = shootDirection;
+			bullet.GetComponent<BulletScript>().directionY = shootDirectionY;
+			bullet.GetComponent<BulletScript>().directionX = (Mathf.Abs(shootDirectionY) == 0)?
+				shootDirectionX : 0;
 		}
 	}
 
@@ -42,9 +45,16 @@ public class PlayerScript : MonoBehaviour {
 	{
 		float h = Input.GetAxis ("Horizontal");
 		if (h > 0)
-			shootDirection = 1;
+			shootDirectionX = 1;
 		else if (h < 0)
-			shootDirection = -1;
+			shootDirectionX = -1;
+		float v = Input.GetAxis ("Vertical");
+		if (v > 0)
+			shootDirectionY = 1;
+		else if (v < 0)
+			shootDirectionY = -1;
+		else
+			shootDirectionY = 0;
 		//anim.SetFloat ("Speed", Mathf.Abs (h));
 		if (h * rb2d.velocity.x < maxSpeed)
 			rb2d.AddForce (Vector2.right * h * moveForce);
