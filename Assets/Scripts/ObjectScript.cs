@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BlockManagerScript : MonoBehaviour {
+public class ObjectScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

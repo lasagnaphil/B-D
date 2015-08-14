@@ -46,7 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BlockManagerScript.cs" />
+     <Compile Include="Assets\Scripts\ObjectScript.cs" />
+     <Compile Include="Assets\Scripts\PlayerScript.cs" />
      <None Include="Assets\Sprites\Platformer Art Complete Pack_0\Extra animations and enemies\Spritesheets\alienBeige.xml" />
      <None Include="Assets\Sprites\Platformer Art Complete Pack_0\Extra animations and enemies\Spritesheets\alienBlue.xml" />
      <None Include="Assets\Sprites\Platformer Art Complete Pack_0\Base pack\Player\p3_spritesheet.txt" />
