@@ -47,7 +47,7 @@ public class BombScript : MonoBehaviour {
 		Vector3 playerPosition = player.position;
 		Vector3 bombPosition = transform.position;
 		float dist = Vector3.Distance (playerPosition, bombPosition);
-		if (dist < 2.2)
+		if (dist < 2.2 || time > 0)
 			callUpdate = true;
 		if (callUpdate) {
 			time -= Time.deltaTime;
