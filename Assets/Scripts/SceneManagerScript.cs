@@ -5,10 +5,11 @@ using SimpleJSON;
 
 public class SceneManagerScript : MonoBehaviour {
 
-	public GameObject player;
+	private PhaseScript phaseScript;
 	public int levelNum = 1;
 
 	void Start () {
+		phaseScript = GameObject.Find ("Player").GetComponent<PhaseScript>();
 		DontDestroyOnLoad (GameObject.Find ("Canvas"));
 		DontDestroyOnLoad (GameObject.Find ("Player"));
 		DontDestroyOnLoad (GameObject.Find ("UIManager"));
@@ -30,7 +31,7 @@ public class SceneManagerScript : MonoBehaviour {
 	}
 
 	public void LoadNextLevel() {
-		player.transform.position = new Vector2(-5.0f, 1.0f);
+		GameObject.Find ("Player").transform.position = new Vector2(-5.0f, 1.0f);
 		levelNum++;
 		// write the current level into text
 		File.WriteAllText ("Assets/data.txt", levelNum.ToString ());
@@ -39,11 +40,12 @@ public class SceneManagerScript : MonoBehaviour {
 
 	public void LoadLevel(int i) {
 		Application.LoadLevel ("bdgame" + i.ToString ());
+		phaseScript.phase = PhaseScript.Phase.Setting;
 		JSONNode sceneData = JSON.Parse (File.ReadAllText ("Assets/sceneData.json"));
-		GameObject.Find ("Player").GetComponent<PhaseScript>().bombNumMax = sceneData["scenes"][i-1]["bomb"].AsInt;
-		GameObject.Find ("Player").GetComponent<PhaseScript>().replaceWoodNumMax = sceneData["scenes"][i-1]["replaceWood"].AsInt;
-		GameObject.Find ("Player").GetComponent<PhaseScript>().replaceSteelNumMax = sceneData["scenes"][i-1]["replaceSteel"].AsInt;
-		GameObject.Find ("Player").GetComponent<PhaseScript>().createNumMax = sceneData["scenes"][i-1]["create"].AsInt;
+		phaseScript.bombNumMax = sceneData["scenes"][i-1]["bomb"].AsInt;
+		phaseScript.replaceWoodNumMax = sceneData["scenes"][i-1]["replaceWood"].AsInt;
+		phaseScript.replaceSteelNumMax = sceneData["scenes"][i-1]["replaceSteel"].AsInt;
+		phaseScript.createNumMax = sceneData["scenes"][i-1]["create"].AsInt;
 	}
 
 }
