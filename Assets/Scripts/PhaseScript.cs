@@ -7,6 +7,13 @@ public class PhaseScript : MonoBehaviour {
 	
 	public Phase phase = Phase.Setting;
 
+	// number of items able to use
+	public int bombNum = 3;
+	public int replaceNum = 2;
+	public int createNum = 1;
+
+	public int score = 0;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -20,17 +27,20 @@ public class PhaseScript : MonoBehaviour {
 
 		if (phase == Phase.Setting) {
 			if (Input.GetMouseButtonDown (1)) {
-				if (hitCollider.gameObject.tag == "Block") {
+				if (hitCollider.gameObject.tag == "Block" && bombNum > 0) {
+					bombNum--;
 					GameObject bomb = (GameObject)Instantiate (Resources.Load ("Bomb"));
 					bomb.transform.position = hitCollider.transform.position;
 				}
 			}
 
-			if (hitCollider.gameObject.tag == "Block") {
+			if (hitCollider.gameObject.tag == "Block" && replaceNum > 0) {
 				BlockScript block = hitCollider.gameObject.GetComponent<BlockScript> ();
 				if (block.type != BlockScript.BlockType.Steel) {
-					if (Input.GetMouseButtonDown (0))
+					if (Input.GetMouseButtonDown (0)) {
+						replaceNum--;
 						block.IfMouseClick ();
+					}
 					else
 						block.IfMouseOver ();
 				}
