@@ -25,7 +25,7 @@ public class BulletScript : MonoBehaviour {
 		//transform.localScale = theScale;
 	}
 
-	void OnTriggerEnter(Collider col)
+	void OnTriggerEnter2D(Collider2D col)
 	{
 		if (col.gameObject.tag == "Block") {
 			col.gameObject.GetComponent<BlockScript>().health -= 100;

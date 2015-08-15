@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BlockScript.cs" />
+     <Compile Include="Assets\Scripts\BombExplosionScript.cs" />
+     <Compile Include="Assets\Scripts\BombScript.cs" />
      <Compile Include="Assets\Scripts\BulletScript.cs" />
      <Compile Include="Assets\Scripts\ObjectScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
