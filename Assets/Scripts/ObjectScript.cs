@@ -10,7 +10,7 @@ public class ObjectScript : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		float x = this.transform.position.x;
 		float y = this.transform.position.y;
 		float z = this.transform.position.z;
@@ -20,6 +20,7 @@ public class ObjectScript : MonoBehaviour {
 	public void toggleGravity(bool value) {
 		Rigidbody2D body = this.GetComponent<Rigidbody2D> ();
 		body.gravityScale = value ? 1 : 0;
+		body.isKinematic = true;
 	}
 
 	 /// <summary>

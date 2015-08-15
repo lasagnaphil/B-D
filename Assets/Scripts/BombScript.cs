@@ -21,11 +21,11 @@ public class BombScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+		transform.position = attachedBlock.position;
 		if (phaseManager.phase != PhaseScript.Phase.Action)
 			return;
 		//GetComponentInChildren<BoxCollider2D> ().enabled = true;
-		transform.position = attachedBlock.position;
 		/*Vector3 playerPosition = player.position;
 		Vector3 bombPosition = transform.position;
 		float dist = Vector3.Distance (playerPosition, bombPosition);

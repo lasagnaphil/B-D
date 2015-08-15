@@ -21,7 +21,7 @@ public class BombExplosionScript : MonoBehaviour {
 		}
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (isActive) {
 			DestroyObject();
@@ -38,7 +38,7 @@ public class BombExplosionScript : MonoBehaviour {
 			Vector3 blockPosition = block.transform.position;
 			Vector3 bombPosition = transform.parent.position;
 			float dist = Vector3.Distance(blockPosition, bombPosition);
-			if (dist > 1.6)	continue;
+			if (dist > 1.8)	continue;
 			Destroy(block);
 		}
 		Destroy (transform.parent.gameObject);

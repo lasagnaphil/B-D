@@ -45,7 +45,7 @@ public class BlockScript : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		Color color = GetComponent<SpriteRenderer> ().color;
 		color.a = highlighted? 0.5f : 1f;
@@ -55,7 +55,7 @@ public class BlockScript : MonoBehaviour {
 		
 		if (health <= 0) {
 			DestroyObject(gameObject);
-			Debug.Log ("block destroyed");
+			//Debug.Log ("block destroyed");
 		}
 	}
 	

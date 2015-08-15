@@ -12,13 +12,22 @@ public class PhaseScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		Collider2D hitCollider = Physics2D.OverlapPoint (mousePosition);
-		if (hitCollider == null)
-			return;
+		
 
 		if (phase == Phase.Setting) {
+			if (hitCollider == null) {
+				if( Input.GetMouseButtonDown(0) ) {
+					GameObject blockStone = (GameObject)Instantiate (Resources.Load ("BlockStone"));
+					blockStone.transform.position = new Vector3(Mathf.Round(mousePosition.x), mousePosition.y, 1);
+					GameObject obj = (GameObject)Instantiate (Resources.Load ("Object"));
+					blockStone.transform.parent = obj.transform;
+				}
+				return;
+			}
+
 			if (Input.GetMouseButtonDown (1)) {
 				if (hitCollider.gameObject.tag == "Block") {
 					GameObject bomb = (GameObject)Instantiate (Resources.Load ("Bomb"));
@@ -47,6 +56,8 @@ public class PhaseScript : MonoBehaviour {
 			}
 
 		} else if (phase == Phase.Action) {
+			if (hitCollider == null)
+				return;
 			if (hitCollider.gameObject.tag == "Block") {
 				BlockScript block = hitCollider.gameObject.GetComponent<BlockScript> ();
 				Vector3 blockPosition = block.transform.position;

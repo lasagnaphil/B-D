@@ -17,7 +17,7 @@ public class BulletScript : MonoBehaviour {
 		//initialScale = theScale.x;
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		rb2d.velocity = new Vector2 (speed * directionX, speed * directionY);
 		//Vector3 theScale = transform.localScale;
