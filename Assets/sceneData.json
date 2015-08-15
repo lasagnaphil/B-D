@@ -1,6 +1,6 @@
 {
-	"scenes": {
-		{"bomb": 2, "replaceWood": 2, "replaceSteel": 0, "create": 0},
-		{"bomb": 3, "replaceWood": 2, "replaceSteel": 2, "create": 1}
-	}
+	"scenes": [
+		{"bomb": "0", "replaceWood": "0", "replaceSteel": "0", "create": "0"},
+		{"bomb": "0", "replaceWood": "0", "replaceSteel": "0", "create": "0"}
+	]
 }
