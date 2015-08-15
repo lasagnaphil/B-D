@@ -7,10 +7,7 @@ public class BombScript : MonoBehaviour {
 	[Range(0, 10)] public float time = 0f;
 	public bool callUpdate = false;
 	private PhaseScript phaseManager;
-<<<<<<< HEAD
 	private Transform player;
-=======
->>>>>>> origin/game-ui
 	private Transform attachedBlock;
 	//private GameObject bombText;
 	public GUIStyle guiStyle;
@@ -18,14 +15,11 @@ public class BombScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		phaseManager = GameObject.Find("Player").GetComponent<PhaseScript>();
-<<<<<<< HEAD
 		player = GameObject.Find("Player").GetComponent<Transform>();
-=======
 		/*bombText = Instantiate (Resources.Load ("BombText"), transform.position, Quaternion.identity) as GameObject;
 		bombText.transform.SetParent (GameObject.Find ("BombCanvas").transform);
 		Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint (Camera.main, transform.position);
 		bombText.GetComponent<RectTransform>().anchoredPosition = screenPoint;*/
->>>>>>> origin/game-ui
 	}
 
 	void OnGUI () {

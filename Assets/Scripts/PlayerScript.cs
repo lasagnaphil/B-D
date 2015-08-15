@@ -87,6 +87,7 @@ public class PlayerScript : MonoBehaviour {
 	}
 
 	public void die(string causeOfDeath) {
+		Debug.Log ("asd");
 		Destroy (gameObject);
 		Application.LoadLevel("bdgameover");
 	}
