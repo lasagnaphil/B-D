@@ -10,7 +10,7 @@ public class PlayerScript : MonoBehaviour {
 	public float maxSpeed = 50f;
 	public float jumpForce = 1000f;
 	public Transform platformCheck;
-	private bool onPlatform = false;
+	public bool onPlatform = false;
 	//private Animator anim;
 	private Rigidbody2D rb2d;
 

@@ -97,10 +97,12 @@ public class PhaseScript : MonoBehaviour {
 				return;
 			if (hitCollider.gameObject.tag == "Block") {
 				BlockScript block = hitCollider.gameObject.GetComponent<BlockScript> ();
+				GameObject playerObject = GameObject.Find("Player");
 				Vector3 blockPosition = block.transform.position;
-				Vector3 playerPosition = GameObject.Find("Player").transform.position;
+				Vector3 playerPosition = playerObject.transform.position;
 				float dist = Vector3.Distance(blockPosition, playerPosition);
-				if (block.type == BlockScript.BlockType.Wood && dist < 1.2) {
+				PlayerScript player = playerObject.GetComponent<PlayerScript>();
+				if (block.type == BlockScript.BlockType.Wood && dist < 1.2 && player.onPlatform) {
 					if (Input.GetMouseButtonDown (1))
 						Destroy(block.gameObject);
 					else
