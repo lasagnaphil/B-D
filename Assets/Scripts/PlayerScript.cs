@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
 
-	public enum Phase { Setting, Action };
 
 	[HideInInspector] public bool facingRight = true;
 	[HideInInspector] public bool jump = true;
@@ -15,16 +14,15 @@ public class PlayerScript : MonoBehaviour {
 	//private Animator anim;
 	private Rigidbody2D rb2d;
 
-	public GameObject bulletPrefab;
 	public int shootDirectionX = 1;
 	public int shootDirectionY = 1;
-
-	public Phase phase = Phase.Setting;
+	private PhaseScript phaseManager;
 
 	void Awake()
 	{
 		//anim = GetComponent<Animator> ();
 		rb2d = GetComponent<Rigidbody2D> ();
+		phaseManager = GetComponent<PhaseScript> ();
 	}
 	
 	// Update is called once per frame
@@ -47,6 +45,9 @@ public class PlayerScript : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
+		if (phaseManager.phase != PhaseScript.Phase.Action)
+			return;
+
 		float h = Input.GetAxis ("Horizontal");
 		if (h > 0)
 			shootDirectionX = 1;
