@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
 
+	public enum Phase { Setting, Action };
+
 	[HideInInspector] public bool facingRight = true;
 	[HideInInspector] public bool jump = true;
 	public float moveForce = 365f;
@@ -16,6 +18,8 @@ public class PlayerScript : MonoBehaviour {
 	public GameObject bulletPrefab;
 	public int shootDirectionX = 1;
 	public int shootDirectionY = 1;
+
+	public Phase phase = Phase.Setting;
 
 	void Awake()
 	{
@@ -31,14 +35,14 @@ public class PlayerScript : MonoBehaviour {
 		{
 			jump = true;
 		}
-		if (Input.GetButtonDown ("Fire1"))
+		/*if (Input.GetButtonDown ("Fire1"))
 		{
 			GameObject bullet;
 			bullet = Instantiate (Resources.Load("Bullet"), rb2d.transform.position, Quaternion.identity) as GameObject;
 			bullet.GetComponent<BulletScript>().directionY = shootDirectionY;
 			bullet.GetComponent<BulletScript>().directionX = (Mathf.Abs(shootDirectionY) == 0)?
 				shootDirectionX : 0;
-		}
+		}*/
 	}
 
 	void FixedUpdate ()

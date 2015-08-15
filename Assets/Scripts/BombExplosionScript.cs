@@ -31,6 +31,8 @@ public class BombExplosionScript : MonoBehaviour {
 	void DestroyObject()
 	{
 		foreach (GameObject block in collidedBlock) {
+			if (block.GetComponent<BlockScript>().type == BlockScript.BlockType.Steel)
+				continue;
 			Destroy(block);
 		}
 		Destroy (transform.parent.gameObject);
