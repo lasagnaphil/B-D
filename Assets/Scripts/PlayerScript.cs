@@ -6,11 +6,11 @@ public class PlayerScript : MonoBehaviour {
 
 	[HideInInspector] public bool facingRight = true;
 	[HideInInspector] public bool jump = true;
-	public float moveForce = 365f;
-	public float maxSpeed = 50f;
-	public float jumpForce = 1000f;
+	public float moveForce = 200f;
+	public float maxSpeed = 3f;
+	public float jumpForce = 250f;
 	public Transform platformCheck;
-	private bool onPlatform = false;
+	public bool onPlatform = false;
 	//private Animator anim;
 	private Rigidbody2D rb2d;
 

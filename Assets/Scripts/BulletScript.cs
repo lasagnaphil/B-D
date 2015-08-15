@@ -29,7 +29,8 @@ public class BulletScript : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "Block") {
 			Transform block = col.transform;
-			block.GetComponent<BlockScript>().attachedBomb.GetComponent<BombScript>().callUpdate = true;
+			Transform bomb = block.GetComponent<BlockScript>().attachedBomb;
+			if (bomb != null) bomb.GetComponent<BombScript>().callUpdate = true;
 			Destroy (gameObject);
 		}
 	}
