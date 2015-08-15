@@ -8,7 +8,8 @@ public class UIManagerScript : MonoBehaviour {
 	public Text phaseLabel;
 	public Text scoreLabel;
 	public Text bombLabel;
-	public Text replaceLabel;
+	public Text replaceWoodLabel;
+	public Text replaceSteelLabel;
 	public Text createLabel;
 	
 	void Awake () {
@@ -23,7 +24,8 @@ public class UIManagerScript : MonoBehaviour {
 		}
 		scoreLabel.text = "Score: " + phaseManager.score.ToString ();
 		bombLabel.text = phaseManager.bombNum.ToString ();
-		replaceLabel.text = phaseManager.replaceWoodNum.ToString ();
+		replaceWoodLabel.text = phaseManager.replaceWoodNum.ToString ();
+		replaceSteelLabel.text = phaseManager.replaceSteelNum.ToString ();
 		createLabel.text = phaseManager.createNum.ToString ();
 	}
 }

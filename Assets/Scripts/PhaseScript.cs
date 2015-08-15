@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using System.IO;
 using System.Collections;
+using SimpleJSON;
 
 public class PhaseScript : MonoBehaviour {
 	
@@ -8,15 +10,24 @@ public class PhaseScript : MonoBehaviour {
 	public Phase phase = Phase.Setting;
 
 	// number of items able to use
-	public int bombNum = 3;
-	public int replaceWoodNum = 2;
-	public int replaceSteelNum = 2;
-	public int createNum = 1;
+	public int bombNum;
+	public int replaceWoodNum;
+	public int replaceSteelNum;
+	public int createNum;
+
+	public int bombNumMax;
+	public int replaceWoodNumMax;
+	public int replaceSteelNumMax;
+	public int createNumMax;
 
 	public int score = 0;
 
 	// Use this for initialization
 	void Start () {
+		bombNum = bombNumMax;
+		replaceWoodNum = replaceWoodNumMax;
+		replaceSteelNum = replaceSteelNumMax;
+		createNum = createNumMax;
 	}
 	
 	// Update is called once per frame
