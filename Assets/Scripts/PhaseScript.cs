@@ -11,11 +11,13 @@ public class PhaseScript : MonoBehaviour {
 
 	// number of items able to use
 	[HideInInspector] public int bombNum;
+	[HideInInspector] public int timeBombNum;
 	[HideInInspector] public int replaceWoodNum;
 	[HideInInspector] public int replaceSteelNum;
 	[HideInInspector] public int createNum;
 
 	[HideInInspector] public int bombNumMax;
+	[HideInInspector] public int timeBombNumMax;
 	[HideInInspector] public int replaceWoodNumMax;
 	[HideInInspector] public int replaceSteelNumMax;
 	[HideInInspector] public int createNumMax;

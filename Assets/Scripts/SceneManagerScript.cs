@@ -52,10 +52,12 @@ public class SceneManagerScript : MonoBehaviour {
 		phaseScript.phase = PhaseScript.Phase.Setting;
 		var sceneData = JSON.Parse (File.ReadAllText ("Assets/sceneData.json"));
 		phaseScript.bombNumMax = sceneData[i.ToString()]["bomb"].AsInt;
+		phaseScript.timeBombNumMax = sceneData [i.ToString ()] ["timeBomb"].AsInt;
 		phaseScript.replaceWoodNumMax = sceneData[i.ToString()]["replaceWood"].AsInt;
 		phaseScript.replaceSteelNumMax = sceneData[i.ToString()]["replaceSteel"].AsInt;
 		phaseScript.createNumMax = sceneData[i.ToString()]["create"].AsInt;
 		phaseScript.bombNum = phaseScript.bombNumMax;
+		phaseScript.timeBombNum = phaseScript.timeBombNumMax;
 		phaseScript.replaceWoodNum = phaseScript.replaceWoodNumMax;
 		phaseScript.replaceSteelNum = phaseScript.replaceSteelNumMax;
 		phaseScript.createNum = phaseScript.createNumMax;
