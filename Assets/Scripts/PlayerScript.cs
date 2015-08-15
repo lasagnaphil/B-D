@@ -85,4 +85,8 @@ public class PlayerScript : MonoBehaviour {
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+	public void die() {
+		Destroy (gameObject);
+	}
 }

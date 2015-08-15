@@ -3,6 +3,8 @@
 # =============== #
 Temp/*
 Library/*
+/Temp/*
+/Library/*
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #

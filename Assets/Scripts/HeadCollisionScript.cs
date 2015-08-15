@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HeadCheckScript : MonoBehaviour {
+public class HeadCollisionScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -10,7 +10,7 @@ public class HeadCheckScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
@@ -19,7 +19,6 @@ public class HeadCheckScript : MonoBehaviour {
 		if (col.attachedRigidbody.velocity.magnitude < 0.1)
 			return;
 
-		Destroy (transform.parent.gameObject);
-		//////////////////////////////////////////////////////killed!
+		transform.parent.gameObject.GetComponent<PlayerScript> ().die ();
 	}
 }

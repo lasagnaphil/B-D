@@ -6,13 +6,13 @@ public class BombScript : MonoBehaviour {
 	[Range(0, 10)] public float time = 0f;
 	public bool callUpdate = false;
 	private PhaseScript phaseManager;
-	//private Transform player;
+	private Transform player;
 	private Transform attachedBlock;
 
 	// Use this for initialization
 	void Start () {
 		phaseManager = GameObject.Find("Player").GetComponent<PhaseScript>();
-		//player = GameObject.Find("Player").GetComponent<Transform>();
+		player = GameObject.Find("Player").GetComponent<Transform>();
 	}
 
 	public void attach(Transform block) {
