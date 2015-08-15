@@ -27,6 +27,8 @@ public class ObjectScript : MonoBehaviour {
 	 /// </summary>
 	 /// <param name="removedBlock">Removed block.</param>
 	public void split (Transform removedBlock) {
+		if (this == null)
+			return;
 		Transform[] raw = this.transform.GetComponentsInChildren<Transform> ();
 		List<Transform> unmarked = new List<Transform>(raw);
 		unmarked.Remove (this.transform);
@@ -34,7 +36,7 @@ public class ObjectScript : MonoBehaviour {
 		
 		while (unmarked.Count > 0) {
 			List<Transform> connectedBlocks = getConnectedBlockFrom(unmarked);
-			GameObject newObject = (GameObject)Instantiate(Resources.Load ("Prefabs/Object"));
+			GameObject newObject = (GameObject)Instantiate(Resources.Load ("Object"));
 			foreach(Transform block in connectedBlocks) {
 				block.parent = newObject.transform;
 			}

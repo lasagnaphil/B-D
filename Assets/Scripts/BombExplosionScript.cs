@@ -14,7 +14,7 @@ public class BombExplosionScript : MonoBehaviour {
 		}
 	}
 
-	void onTriggerExit2D(Collider2D col)
+	void OnTriggerExit2D(Collider2D col)
 	{
 		if (col.gameObject.tag == "Block") {
 			collidedBlock.Remove(col.gameObject);

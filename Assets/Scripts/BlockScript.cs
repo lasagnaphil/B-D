@@ -34,7 +34,7 @@ public class BlockScript : MonoBehaviour {
 		}
 	}
 	
-	void onDestroy() {
+	void OnDestroy() {
 		obj.split (this.transform);
 	}
 }
