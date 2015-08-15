@@ -35,7 +35,12 @@ public class BombScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		//bombText.GetComponent<Text> ().text = time.ToString () + "s";
-		transform.position = attachedBlock.position;
+		if (attachedBlock != null)
+			transform.position = attachedBlock.position;
+		else {
+			Explode();
+			callUpdate = false;
+		}
 		if (phaseManager.phase != PhaseScript.Phase.Action)
 			return;
 		//GetComponentInChildren<BoxCollider2D> ().enabled = true;

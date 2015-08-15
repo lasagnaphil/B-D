@@ -25,6 +25,9 @@ public class PhaseScript : MonoBehaviour {
 		
 
 		if (phase == Phase.Setting) {
+			if (Input.GetButtonDown("PhaseSwitch")) {
+				phase = Phase.Action;
+			}
 			if (hitCollider == null) {
 				if( Input.GetMouseButtonDown(0) && createNum > 0) {
 					createNum--;
@@ -62,11 +65,10 @@ public class PhaseScript : MonoBehaviour {
 				bomb.time = Mathf.Clamp(bomb.time+delta,0,10);
 			}
 
-			if (Input.GetButtonDown("PhaseSwitch")) {
-				phase = Phase.Action;
-			}
-
 		} else if (phase == Phase.Action) {
+			if (Input.GetButtonDown("Suicide")){
+				GameObject.Find("Player").GetComponent<PlayerScript>().die("Suicide");
+			}
 			if (hitCollider == null)
 				return;
 			if (hitCollider.gameObject.tag == "Block") {
