@@ -8,6 +8,7 @@ public class BlockScript : MonoBehaviour {
 	public int health = 100;
 	public BlockType type;
 	private ObjectScript obj;
+	private bool highlighted = false;
 
 	
 	// Use this for initialization
@@ -28,9 +29,10 @@ public class BlockScript : MonoBehaviour {
 
 	public void IfMouseOver() {
 		// change alpha value of block
-		Color color = GetComponent<SpriteRenderer> ().color;
-		color.a = 0.5f;
-		GetComponent<SpriteRenderer> ().color = color;
+		highlighted = true;
+		//Color color = GetComponent<SpriteRenderer> ().color;
+		//color.a = 0.5f;
+		//GetComponent<SpriteRenderer> ().color = color;
 	}
 	
 	public void IfMouseClick() {
@@ -46,9 +48,11 @@ public class BlockScript : MonoBehaviour {
 	void Update()
 	{
 		Color color = GetComponent<SpriteRenderer> ().color;
-		color.a = 1f;
+		color.a = highlighted? 0.5f : 1f;
 		GetComponent<SpriteRenderer> ().color = color;
-
+		if (highlighted)
+			highlighted = false;
+		
 		if (health <= 0) {
 			DestroyObject(gameObject);
 			Debug.Log ("block destroyed");

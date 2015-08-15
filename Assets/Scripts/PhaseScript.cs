@@ -13,31 +13,45 @@ public class PhaseScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (phase != Phase.Setting)
+		Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		Collider2D hitCollider = Physics2D.OverlapPoint (mousePosition);
+		if (hitCollider == null)
 			return;
-		
-		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
-		if (hitCollider == null) return;
 
-		if (Input.GetMouseButtonDown (1)) {
+		if (phase == Phase.Setting) {
+			if (Input.GetMouseButtonDown (1)) {
+				if (hitCollider.gameObject.tag == "Block") {
+					GameObject bomb = (GameObject)Instantiate (Resources.Load ("Bomb"));
+					bomb.transform.position = hitCollider.transform.position;
+				}
+			}
+
 			if (hitCollider.gameObject.tag == "Block") {
-				GameObject bomb = (GameObject)Instantiate(Resources.Load("Bomb"));
-				bomb.transform.position = hitCollider.transform.position;
+				BlockScript block = hitCollider.gameObject.GetComponent<BlockScript> ();
+				if (block.type != BlockScript.BlockType.Steel) {
+					if (Input.GetMouseButtonDown (0))
+						block.IfMouseClick ();
+					else
+						block.IfMouseOver ();
+				}
 			}
-		}
 
-		if (hitCollider.gameObject.tag == "Block") {
-			BlockScript block = hitCollider.gameObject.GetComponent<BlockScript>();
-			if (block.type != BlockScript.BlockType.Steel) {
-				if(Input.GetMouseButtonDown (0))
-					block.IfMouseClick();
-				else block.IfMouseOver();
+			if (Input.GetButtonDown("PhaseSwitch")) {
+				phase = Phase.Action;
 			}
-		}
-
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			phase = Phase.Action;
+		} else if (phase == Phase.Action) {
+			if (hitCollider.gameObject.tag == "Block") {
+				BlockScript block = hitCollider.gameObject.GetComponent<BlockScript> ();
+				Vector3 blockPosition = block.transform.position;
+				Vector3 playerPosition = GameObject.Find("Player").transform.position;
+				float dist = Vector3.Distance(blockPosition, playerPosition);
+				if (block.type == BlockScript.BlockType.Wood && dist < 1.5) {
+					if (Input.GetMouseButtonDown (0))
+						Destroy(block.gameObject);
+					else
+						block.IfMouseOver ();
+				}
+			}
 		}
 	}
 }
