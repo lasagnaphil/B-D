@@ -8,7 +8,7 @@ public class BombScript : MonoBehaviour {
 	public bool callUpdate = false;
 	private PhaseScript phaseManager;
 	private Transform player;
-	private Transform attachedBlock;
+	public Transform attachedBlock;
 	//private GameObject bombText;
 	public GUIStyle guiStyle;
 
@@ -29,6 +29,7 @@ public class BombScript : MonoBehaviour {
 	}
 	public void attach(Transform block) {
 		attachedBlock = block;
+		block.GetComponent<BlockScript> ().attachedBomb = transform;
 		transform.position = attachedBlock.position;
 	}
 	
@@ -38,24 +39,27 @@ public class BombScript : MonoBehaviour {
 		if (attachedBlock != null)
 			transform.position = attachedBlock.position;
 		else {
-			Explode();
-			callUpdate = false;
+			fire ();
 		}
 		if (phaseManager.phase != PhaseScript.Phase.Action)
 			return;
 		//GetComponentInChildren<BoxCollider2D> ().enabled = true;
-		/*Vector3 playerPosition = player.position;
+		Vector3 playerPosition = player.position;
 		Vector3 bombPosition = transform.position;
 		float dist = Vector3.Distance (playerPosition, bombPosition);
 		if (dist < 2.2)
-			callUpdate = true;*/
+			callUpdate = true;
 		if (callUpdate) {
 			time -= Time.deltaTime;
 			if (time <= 0) {
-				Explode ();
-				callUpdate = false;
+				fire ();
 			}
 		}
+	}
+
+	public void fire() {
+		Explode ();
+		callUpdate = false;
 	}
 
 	void Explode() {

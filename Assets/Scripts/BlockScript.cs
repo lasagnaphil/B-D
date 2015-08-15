@@ -7,6 +7,7 @@ public class BlockScript : MonoBehaviour {
 
 	public int health = 100;
 	public BlockType type;
+	public Transform attachedBomb;
 	private ObjectScript obj;
 	private bool highlighted = false;
 
@@ -35,12 +36,17 @@ public class BlockScript : MonoBehaviour {
 		//GetComponent<SpriteRenderer> ().color = color;
 	}
 	
-	public void IfMouseClick() {
+	public void IfMouseClick(BlockType type) {
 		GetComponent<BoxCollider2D>().enabled = false;
 		// create wood block
-		GameObject woodBlock;
-		woodBlock = Instantiate(Resources.Load("BlockWood"), transform.position, Quaternion.identity) as GameObject;
-		woodBlock.transform.parent = transform.parent;
+		GameObject replacedBlock;
+		replacedBlock = Instantiate(Resources.Load(type == BlockType.Wood? "BlockWood" : type == BlockType.Steel? "BlockSteel" : "BlockStone" ), transform.position, Quaternion.identity) as GameObject;
+		if (type == BlockType.Steel) {
+			GameObject newObject = (GameObject)Instantiate (Resources.Load ("Object"));
+			replacedBlock.transform.parent = newObject.transform;
+		} else {
+			replacedBlock.transform.parent = transform.parent;
+		}
 		// destroy old block
 		Destroy(gameObject);
 	}
