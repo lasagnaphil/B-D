@@ -8,7 +8,7 @@ public class ObjectScript : MonoBehaviour {
 	void Start () {
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		float x = this.transform.position.x;
