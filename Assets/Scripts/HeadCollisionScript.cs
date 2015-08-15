@@ -19,6 +19,6 @@ public class HeadCollisionScript : MonoBehaviour {
 		if (col.attachedRigidbody.velocity.magnitude < 0.1)
 			return;
 
-		transform.parent.gameObject.GetComponent<PlayerScript> ().die ();
+		transform.parent.gameObject.GetComponent<PlayerScript> ().die ("FallingBlock");
 	}
 }

@@ -86,7 +86,8 @@ public class PlayerScript : MonoBehaviour {
 		transform.localScale = theScale;
 	}
 
-	public void die() {
+	public void die(string causeOfDeath) {
 		Destroy (gameObject);
+		Application.LoadLevel("bdgameover");
 	}
 }

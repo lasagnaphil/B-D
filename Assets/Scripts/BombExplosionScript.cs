@@ -30,16 +30,23 @@ public class BombExplosionScript : MonoBehaviour {
 
 	void DestroyObject()
 	{
+		Vector3 bombPosition = transform.parent.position;
+		float dist;
 		foreach (GameObject block in collidedBlock) {
 			if (block == null)
 				continue;
 			if (block.GetComponent<BlockScript>().type == BlockScript.BlockType.Steel)
 				continue;
 			Vector3 blockPosition = block.transform.position;
-			Vector3 bombPosition = transform.parent.position;
-			float dist = Vector3.Distance(blockPosition, bombPosition);
+			dist = Vector3.Distance(blockPosition, bombPosition);
 			if (dist > 1.8)	continue;
 			Destroy(block);
+		}
+		Transform player = GameObject.Find ("Player").transform;
+		Vector3 playerPosition = player.position;
+		dist = Vector3.Distance (bombPosition, playerPosition);
+		if (dist < 1.8) {
+			player.GetComponent<PlayerScript>().die("Bomb");
 		}
 		Destroy (transform.parent.gameObject);
 	}
