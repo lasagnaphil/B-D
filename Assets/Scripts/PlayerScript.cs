@@ -33,14 +33,29 @@ public class PlayerScript : MonoBehaviour {
 		{
 			jump = true;
 		}
-		/*if (Input.GetButtonDown ("Fire1"))
+		if (phaseManager.phase == PhaseScript.Phase.Action && Input.GetButtonDown ("Fire1"))
 		{
-			GameObject bullet;
-			bullet = Instantiate (Resources.Load("Bullet"), rb2d.transform.position, Quaternion.identity) as GameObject;
+			Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+			Vector2 playerPosition = new Vector2(transform.position.x, transform.position.y);
+			Vector2 delta = mousePosition - playerPosition;
+			if (delta.x > delta.y && delta.y > -delta.x ) {
+				shootDirectionX = 1;
+				shootDirectionY = 0;
+			} else if (delta.y > delta.x && delta.x > -delta.y ) {
+				shootDirectionX = 0;
+				shootDirectionY = 1;
+			} else if (-delta.x > delta.y && delta.y > delta.x ) {
+				shootDirectionX = -1;
+				shootDirectionY = 0;
+			} else if (-delta.y > delta.x && delta.x > delta.y ) {
+				shootDirectionX = 0;
+				shootDirectionY = -1;
+			}
+			GameObject bullet = Instantiate (Resources.Load("Bullet"), rb2d.transform.position, Quaternion.identity) as GameObject;
+			bullet.GetComponent<BulletScript>().directionX = shootDirectionX;
 			bullet.GetComponent<BulletScript>().directionY = shootDirectionY;
-			bullet.GetComponent<BulletScript>().directionX = (Mathf.Abs(shootDirectionY) == 0)?
-				shootDirectionX : 0;
-		}*/
+			bullet.transform.Rotate(0, 0, 180/Mathf.PI*Mathf.Atan2 (shootDirectionY, shootDirectionX));
+		}
 	}
 
 	void FixedUpdate ()
@@ -49,17 +64,7 @@ public class PlayerScript : MonoBehaviour {
 			return;
 
 		float h = Input.GetAxis ("Horizontal");
-		if (h > 0)
-			shootDirectionX = 1;
-		else if (h < 0)
-			shootDirectionX = -1;
-		float v = Input.GetAxis ("Vertical");
-		if (v > 0)
-			shootDirectionY = 1;
-		else if (v < 0)
-			shootDirectionY = -1;
-		else
-			shootDirectionY = 0;
+		//float v = Input.GetAxis ("Vertical");
 		//anim.SetFloat ("Speed", Mathf.Abs (h));
 		if (h * rb2d.velocity.x < maxSpeed)
 			rb2d.AddForce (Vector2.right * h * moveForce);
@@ -87,7 +92,6 @@ public class PlayerScript : MonoBehaviour {
 	}
 
 	public void die(string causeOfDeath) {
-		Debug.Log ("asd");
 		Destroy (gameObject);
 		Application.LoadLevel("bdgameover");
 	}

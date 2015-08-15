@@ -23,7 +23,7 @@ public class UIManagerScript : MonoBehaviour {
 		}
 		scoreLabel.text = "Score: " + phaseManager.score.ToString ();
 		bombLabel.text = phaseManager.bombNum.ToString ();
-		replaceLabel.text = phaseManager.replaceNum.ToString ();
+		replaceLabel.text = phaseManager.replaceWoodNum.ToString ();
 		createLabel.text = phaseManager.createNum.ToString ();
 	}
 }

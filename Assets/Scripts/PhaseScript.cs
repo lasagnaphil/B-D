@@ -9,7 +9,8 @@ public class PhaseScript : MonoBehaviour {
 
 	// number of items able to use
 	public int bombNum = 3;
-	public int replaceNum = 2;
+	public int replaceWoodNum = 2;
+	public int replaceSteelNum = 2;
 	public int createNum = 1;
 
 	public int score = 0;
@@ -39,7 +40,8 @@ public class PhaseScript : MonoBehaviour {
 				return;
 			}
 
-			if (Input.GetMouseButtonDown (1)) {
+			//////////////////////bomb
+			if (Input.GetMouseButtonDown (2)) {
 				if (hitCollider.gameObject.tag == "Block" && bombNum > 0) {
 					bombNum--;
 					GameObject bomb = (GameObject)Instantiate (Resources.Load ("Bomb"));
@@ -48,21 +50,32 @@ public class PhaseScript : MonoBehaviour {
 				}
 			}
 
-			if (hitCollider.gameObject.tag == "Block" && replaceNum > 0) {
+			/////////////////////////wood/steal
+			if (hitCollider.gameObject.tag == "Block") {
 				BlockScript block = hitCollider.gameObject.GetComponent<BlockScript> ();
-				if (block.type != BlockScript.BlockType.Steel) {
-					if (Input.GetMouseButtonDown (0)) {
-						replaceNum--;
-						block.IfMouseClick ();
+				if (block.type == BlockScript.BlockType.Stone) {
+					if (replaceWoodNum > 0 || replaceSteelNum > 0) {
+						if (Input.GetMouseButtonDown (0) && replaceWoodNum>0 ) {
+							replaceWoodNum--;
+							block.IfMouseClick (BlockScript.BlockType.Wood);
+						} else if (Input.GetMouseButtonDown(1) && replaceSteelNum > 0) {
+							replaceSteelNum--;
+							block.IfMouseClick (BlockScript.BlockType.Steel);
+						} else {
+							block.IfMouseOver ();
+						}
 					}
-					else
-						block.IfMouseOver ();
 				}
-			} 
-			else if (hitCollider.gameObject.tag == "Bomb") {
+			/////////////////////////bomb timer
+			} else if (hitCollider.gameObject.tag == "Bomb") {
 				float delta = 1 * Input.GetAxis("Mouse ScrollWheel");
 				BombScript bomb = hitCollider.gameObject.GetComponent<BombScript>();
-				bomb.time = Mathf.Clamp(bomb.time+delta,0,10);
+				if (delta < 0 && bomb.time == 0) {
+					Destroy (bomb.gameObject);
+					bombNum++;
+				} else {
+					bomb.time = Mathf.Clamp(bomb.time+delta,0,10);
+				}
 			}
 
 		} else if (phase == Phase.Action) {
@@ -76,8 +89,8 @@ public class PhaseScript : MonoBehaviour {
 				Vector3 blockPosition = block.transform.position;
 				Vector3 playerPosition = GameObject.Find("Player").transform.position;
 				float dist = Vector3.Distance(blockPosition, playerPosition);
-				if (block.type == BlockScript.BlockType.Wood && dist < 1.5) {
-					if (Input.GetMouseButtonDown (0))
+				if (block.type == BlockScript.BlockType.Wood && dist < 1.2) {
+					if (Input.GetMouseButtonDown (1))
 						Destroy(block.gameObject);
 					else
 						block.IfMouseOver ();

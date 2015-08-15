@@ -28,7 +28,8 @@ public class BulletScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D col)
 	{
 		if (col.gameObject.tag == "Block") {
-			col.gameObject.GetComponent<BlockScript>().health -= 100;
+			Transform block = col.transform;
+			block.GetComponent<BlockScript>().attachedBomb.GetComponent<BombScript>().callUpdate = true;
 			Destroy (gameObject);
 		}
 	}
