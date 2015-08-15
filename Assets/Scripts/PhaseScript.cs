@@ -22,7 +22,8 @@ public class PhaseScript : MonoBehaviour {
 			if (Input.GetMouseButtonDown (1)) {
 				if (hitCollider.gameObject.tag == "Block") {
 					GameObject bomb = (GameObject)Instantiate (Resources.Load ("Bomb"));
-					bomb.transform.position = hitCollider.transform.position;
+					BombScript bombManager = bomb.GetComponent<BombScript>();
+					bombManager.attach(hitCollider.transform);
 				}
 			}
 
@@ -34,11 +35,17 @@ public class PhaseScript : MonoBehaviour {
 					else
 						block.IfMouseOver ();
 				}
+			} 
+			else if (hitCollider.gameObject.tag == "Bomb") {
+				float delta = 1 * Input.GetAxis("Mouse ScrollWheel");
+				BombScript bomb = hitCollider.gameObject.GetComponent<BombScript>();
+				bomb.time = Mathf.Clamp(bomb.time+delta,0,10);
 			}
 
 			if (Input.GetButtonDown("PhaseSwitch")) {
 				phase = Phase.Action;
 			}
+
 		} else if (phase == Phase.Action) {
 			if (hitCollider.gameObject.tag == "Block") {
 				BlockScript block = hitCollider.gameObject.GetComponent<BlockScript> ();

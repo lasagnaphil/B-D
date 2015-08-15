@@ -35,6 +35,10 @@ public class BombExplosionScript : MonoBehaviour {
 				continue;
 			if (block.GetComponent<BlockScript>().type == BlockScript.BlockType.Steel)
 				continue;
+			Vector3 blockPosition = block.transform.position;
+			Vector3 bombPosition = transform.parent.position;
+			float dist = Vector3.Distance(blockPosition, bombPosition);
+			if (dist > 1.6)	continue;
 			Destroy(block);
 		}
 		Destroy (transform.parent.gameObject);
