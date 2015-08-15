@@ -33,6 +33,11 @@ public class ObjectScript : MonoBehaviour {
 		List<Transform> unmarked = new List<Transform>(raw);
 		unmarked.Remove (this.transform);
 		unmarked.Remove (removedBlock);
+		foreach (Transform block in unmarked) {
+			if (block.gameObject == null) {
+				unmarked.Remove(block);
+			}
+		}
 		
 		while (unmarked.Count > 0) {
 			List<Transform> connectedBlocks = getConnectedBlockFrom(unmarked);

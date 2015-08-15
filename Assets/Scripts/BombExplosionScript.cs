@@ -24,7 +24,6 @@ public class BombExplosionScript : MonoBehaviour {
 	void Update()
 	{
 		if (isActive) {
-			transform.parent.GetComponent<Rigidbody2D>().isKinematic = true;
 			DestroyObject();
 		}
 	}

@@ -34,7 +34,7 @@ public class PlayerScript : MonoBehaviour {
 		if (Input.GetButtonDown ("Fire1"))
 		{
 			GameObject bullet;
-			bullet = Instantiate (bulletPrefab, rb2d.transform.position, Quaternion.identity) as GameObject;
+			bullet = Instantiate (Resources.Load("Bullet"), rb2d.transform.position, Quaternion.identity) as GameObject;
 			bullet.GetComponent<BulletScript>().directionY = shootDirectionY;
 			bullet.GetComponent<BulletScript>().directionX = (Mathf.Abs(shootDirectionY) == 0)?
 				shootDirectionX : 0;

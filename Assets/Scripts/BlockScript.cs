@@ -12,7 +12,6 @@ public class BlockScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		obj = transform.parent.GetComponent<ObjectScript>();
-
 		switch (type) {
 		case BlockType.Steel:
 			obj.toggleGravity(false);
@@ -35,6 +34,7 @@ public class BlockScript : MonoBehaviour {
 	}
 	
 	void OnDestroy() {
+		obj = transform.parent.GetComponent<ObjectScript>();
 		obj.split (this.transform);
 	}
 }
