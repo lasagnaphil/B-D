@@ -7,6 +7,7 @@ public class ExitScript : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "Player") {
 			GameObject.Find ("SceneManager").GetComponent<SceneManagerScript> ().LoadNextLevel ();
+			Destroy(gameObject);
 		}
 	}
 }
