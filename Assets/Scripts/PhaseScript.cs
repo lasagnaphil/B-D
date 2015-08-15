@@ -10,24 +10,20 @@ public class PhaseScript : MonoBehaviour {
 	public Phase phase = Phase.Setting;
 
 	// number of items able to use
-	public int bombNum;
-	public int replaceWoodNum;
-	public int replaceSteelNum;
-	public int createNum;
+	[HideInInspector] public int bombNum;
+	[HideInInspector] public int replaceWoodNum;
+	[HideInInspector] public int replaceSteelNum;
+	[HideInInspector] public int createNum;
 
-	public int bombNumMax;
-	public int replaceWoodNumMax;
-	public int replaceSteelNumMax;
-	public int createNumMax;
+	[HideInInspector] public int bombNumMax;
+	[HideInInspector] public int replaceWoodNumMax;
+	[HideInInspector] public int replaceSteelNumMax;
+	[HideInInspector] public int createNumMax;
 
 	public int score = 0;
 
 	// Use this for initialization
 	void Start () {
-		bombNum = bombNumMax;
-		replaceWoodNum = replaceWoodNumMax;
-		replaceSteelNum = replaceSteelNumMax;
-		createNum = createNumMax;
 	}
 	
 	// Update is called once per frame

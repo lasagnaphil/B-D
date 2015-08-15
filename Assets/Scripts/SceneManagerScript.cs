@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.IO;
+using System.Text;
 using System.Collections;
 using SimpleJSON;
 
@@ -18,6 +19,8 @@ public class SceneManagerScript : MonoBehaviour {
 		levelNum = int.Parse(File.ReadAllText ("Assets/data.txt"));
 		if (levelNum != 1)
 			LoadLevel (levelNum);
+		else
+			updatePhaseVariables (1);
 	}
 
 	void Update() {
@@ -32,6 +35,7 @@ public class SceneManagerScript : MonoBehaviour {
 
 	public void LoadNextLevel() {
 		GameObject.Find ("Player").transform.position = new Vector2(-5.0f, 1.0f);
+		GameObject.Find ("Player").GetComponent<Rigidbody2D> ().velocity = new Vector2 (0f, 0f);
 		levelNum++;
 		// write the current level into text
 		File.WriteAllText ("Assets/data.txt", levelNum.ToString ());
@@ -40,12 +44,21 @@ public class SceneManagerScript : MonoBehaviour {
 
 	public void LoadLevel(int i) {
 		Application.LoadLevel ("bdgame" + i.ToString ());
+		updatePhaseVariables (i);
+	}
+
+	void updatePhaseVariables(int i)
+	{
 		phaseScript.phase = PhaseScript.Phase.Setting;
-		JSONNode sceneData = JSON.Parse (File.ReadAllText ("Assets/sceneData.json"));
-		phaseScript.bombNumMax = sceneData["scenes"][i-1]["bomb"].AsInt;
-		phaseScript.replaceWoodNumMax = sceneData["scenes"][i-1]["replaceWood"].AsInt;
-		phaseScript.replaceSteelNumMax = sceneData["scenes"][i-1]["replaceSteel"].AsInt;
-		phaseScript.createNumMax = sceneData["scenes"][i-1]["create"].AsInt;
+		var sceneData = JSON.Parse (File.ReadAllText ("Assets/sceneData.json"));
+		phaseScript.bombNumMax = sceneData[i.ToString()]["bomb"].AsInt;
+		phaseScript.replaceWoodNumMax = sceneData[i.ToString()]["replaceWood"].AsInt;
+		phaseScript.replaceSteelNumMax = sceneData[i.ToString()]["replaceSteel"].AsInt;
+		phaseScript.createNumMax = sceneData[i.ToString()]["create"].AsInt;
+		phaseScript.bombNum = phaseScript.bombNumMax;
+		phaseScript.replaceWoodNum = phaseScript.replaceWoodNumMax;
+		phaseScript.replaceSteelNum = phaseScript.replaceSteelNumMax;
+		phaseScript.createNum = phaseScript.createNumMax;
 	}
 
 }
