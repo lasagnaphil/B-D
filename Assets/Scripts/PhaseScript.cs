@@ -26,7 +26,8 @@ public class PhaseScript : MonoBehaviour {
 
 		if (phase == Phase.Setting) {
 			if (hitCollider == null) {
-				if( Input.GetMouseButtonDown(0) ) {
+				if( Input.GetMouseButtonDown(0) && createNum > 0) {
+					createNum--;
 					GameObject blockStone = (GameObject)Instantiate (Resources.Load ("BlockStone"));
 					blockStone.transform.position = new Vector3(Mathf.Round(mousePosition.x), mousePosition.y, 1);
 					GameObject obj = (GameObject)Instantiate (Resources.Load ("Object"));
