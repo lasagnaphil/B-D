@@ -8,6 +8,7 @@ public class SceneManagerScript : MonoBehaviour {
 
 	private PhaseScript phaseScript;
 	public int levelNum = 1;
+	public int maxLevelNum = 8;
 
 	void Start () {
 		phaseScript = GameObject.Find ("Player").GetComponent<PhaseScript>();
@@ -16,7 +17,7 @@ public class SceneManagerScript : MonoBehaviour {
 		DontDestroyOnLoad (GameObject.Find ("UIManager"));
 		DontDestroyOnLoad (GameObject.Find ("BombCanvas"));
 		DontDestroyOnLoad (gameObject);
-		levelNum = int.Parse(File.ReadAllText ("Assets/data.txt"));
+		levelNum = int.Parse(File.ReadAllText ("data.txt"));
 		if (levelNum != 1)
 			LoadLevel (levelNum);
 		else
@@ -24,7 +25,8 @@ public class SceneManagerScript : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Application.loadedLevelName == "bdgameover") {
+		if (Application.loadedLevelName == "bdgameover" ||
+		    Application.loadedLevelName == "bdfinish") {
 			Destroy (GameObject.Find ("Canvas"));
 			Destroy (GameObject.Find ("Player"));
 			Destroy (GameObject.Find ("UIManager"));
@@ -35,10 +37,17 @@ public class SceneManagerScript : MonoBehaviour {
 
 	public void LoadNextLevel() {
 		GameObject.Find ("Player").transform.position = new Vector2(-5.0f, 1.0f);
+		if (levelNum == 4)
+			GameObject.Find ("Player").transform.position = new Vector2 (-7.0f, 1.0f);
 		GameObject.Find ("Player").GetComponent<Rigidbody2D> ().velocity = new Vector2 (0f, 0f);
+		if (levelNum == maxLevelNum) {
+			Application.LoadLevel ("bdfinish");
+			File.WriteAllText ("data.txt", levelNum.ToString ());
+			return;
+		}
 		levelNum++;
 		// write the current level into text
-		File.WriteAllText ("Assets/data.txt", levelNum.ToString ());
+		File.WriteAllText ("data.txt", levelNum.ToString ());
 		LoadLevel (levelNum);
 	}
 
@@ -50,7 +59,7 @@ public class SceneManagerScript : MonoBehaviour {
 	void updatePhaseVariables(int i)
 	{
 		phaseScript.phase = PhaseScript.Phase.Setting;
-		var sceneData = JSON.Parse (File.ReadAllText ("Assets/sceneData.json"));
+		var sceneData = JSON.Parse (File.ReadAllText ("sceneData.json"));
 		phaseScript.bombNumMax = sceneData[i.ToString()]["bomb"].AsInt;
 		phaseScript.timeBombNumMax = sceneData [i.ToString ()] ["timeBomb"].AsInt;
 		phaseScript.replaceWoodNumMax = sceneData[i.ToString()]["replaceWood"].AsInt;
