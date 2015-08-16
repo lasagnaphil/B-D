@@ -16,4 +16,8 @@ public class StartButtonScript : MonoBehaviour {
 	public void loadGame() {
 		Application.LoadLevel ("bdgame");
 	}
+
+	public void loadTutorial() {
+		Application.LoadLevel ("bdtutorial1");
+	}
 }

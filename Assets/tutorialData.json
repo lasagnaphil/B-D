@@ -1,0 +1,11 @@
+{
+	"1": {"bomb": "0", "replaceWood": "0", "replaceSteel": "0", "create": "0"},
+	"2": {"bomb": "0", "replaceWood": "0", "replaceSteel": "0", "create": "0"},
+	"3": {"bomb": "1", "replaceWood": "0", "replaceSteel": "0", "create": "0"},
+	"4": {"bomb": "0", "replaceWood": "0", "replaceSteel": "0", "create": "0"},
+	"5": {"bomb": "0", "replaceWood": "2", "replaceSteel": "0", "create": "0"},
+	"6": {"bomb": "9", "replaceWood": "9", "replaceSteel": "9", "create": "0"},
+	"7": {"bomb": "9", "replaceWood": "9", "replaceSteel": "9", "create": "1"},
+	"8": {"bomb": "0", "replaceWood": "0", "replaceSteel": "2", "create": "0"},
+	"9": {"bomb": "1", "replaceWood": "0", "replaceSteel": "0", "create": "0"}
+}
