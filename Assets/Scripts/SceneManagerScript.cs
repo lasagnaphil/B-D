@@ -11,6 +11,9 @@ public class SceneManagerScript : MonoBehaviour {
 	public int maxLevelNum = 8;
 
 	void Start () {
+		Color color = GetComponent<SpriteRenderer> ().color;
+		color.a = 0.5f;
+		GetComponent<SpriteRenderer> ().color = color;
 		phaseScript = GameObject.Find ("Player").GetComponent<PhaseScript>();
 		DontDestroyOnLoad (GameObject.Find ("Canvas"));
 		DontDestroyOnLoad (GameObject.Find ("Player"));

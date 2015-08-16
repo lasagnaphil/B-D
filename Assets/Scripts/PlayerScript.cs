@@ -11,7 +11,7 @@ public class PlayerScript : MonoBehaviour {
 	public float jumpForce = 250f;
 	public Transform platformCheck;
 	public bool onPlatform = false;
-	//private Animator anim;
+	private Animator anim;
 	private Rigidbody2D rb2d;
 
 	public int shootDirectionX = 1;
@@ -20,7 +20,7 @@ public class PlayerScript : MonoBehaviour {
 
 	void Awake()
 	{
-		//anim = GetComponent<Animator> ();
+		anim = GetComponent<Animator> ();
 		rb2d = GetComponent<Rigidbody2D> ();
 		phaseManager = GetComponent<PhaseScript> ();
 	}
@@ -64,8 +64,8 @@ public class PlayerScript : MonoBehaviour {
 			return;
 
 		float h = Input.GetAxis ("Horizontal");
-		//float v = Input.GetAxis ("Vertical");
-		//anim.SetFloat ("Speed", Mathf.Abs (h));
+		float v = Input.GetAxis ("Vertical");
+		anim.SetBool ("isRunning", h!=0f);
 		if (h * rb2d.velocity.x < maxSpeed)
 			rb2d.AddForce (Vector2.right * h * moveForce);
 		if (Mathf.Abs (rb2d.velocity.x) > maxSpeed)

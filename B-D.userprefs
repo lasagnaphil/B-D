@@ -1,14 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\StartButtonScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SceneManagerScript.cs">
     <Files>
-      <File FileName="Assets\Scripts\BombExplosionScript.cs" Line="43" Column="19" />
-      <File FileName="Assets\Scripts\PlayerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PhaseScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BombScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\HeadCollisionScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\StartButtonScript.cs" Line="17" Column="33" />
-      <File FileName="Assets\Scripts\RestartButtonScript.cs" Line="14" Column="3" />
+      <File FileName="Assets/Scripts/SceneManagerScript.cs" Line="16" Column="21" />
+      <File FileName="Assets/Scripts/TutorialManagerScript.cs" Line="57" Column="50" />
+      <File FileName="Assets/Scripts/PlayerScript.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

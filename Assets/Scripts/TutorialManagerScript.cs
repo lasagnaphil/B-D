@@ -54,7 +54,7 @@ public class TutorialManagerScript : MonoBehaviour {
 	void updatePhaseVariables(int i)
 	{
 		phaseScript.phase = PhaseScript.Phase.Setting;
-		var sceneData = JSON.Parse (File.ReadAllText ("Assets/tutorialData.json"));
+		var sceneData = JSON.Parse (File.ReadAllText ("tutorialData.json"));
 		phaseScript.bombNumMax = sceneData[i.ToString()]["bomb"].AsInt;
 		phaseScript.timeBombNumMax = sceneData [i.ToString ()] ["timeBomb"].AsInt;
 		phaseScript.replaceWoodNumMax = sceneData[i.ToString()]["replaceWood"].AsInt;
