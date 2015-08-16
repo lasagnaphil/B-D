@@ -51,13 +51,24 @@ public class PhaseScript : MonoBehaviour {
 
 			//////////////////////bomb
 			if (Input.GetMouseButtonDown (2)) {
-				if (hitCollider.gameObject.tag == "Block" && bombNum > 0) {
-					bombNum--;
-					GameObject bomb = (GameObject)Instantiate (Resources.Load ("Bomb"));
-					BombScript bombManager = bomb.GetComponent<BombScript>();
-					bombManager.attach(hitCollider.transform);
+				if (hitCollider.gameObject.tag == "Block") {
+					if (bombNum > 0) {
+						bombNum--;
+						GameObject bomb = (GameObject)Instantiate (Resources.Load ("Bomb"));
+						BombScript bombManager = bomb.GetComponent<BombScript>();
+						bombManager.attach(hitCollider.transform);
+					}
+					else if (timeBombNum > 0) {
+						timeBombNum--;
+						GameObject bomb = (GameObject)Instantiate (Resources.Load ("Bomb"));
+						BombScript bombManager = bomb.GetComponent<BombScript>();
+						bombManager.attach (hitCollider.transform);
+						bombManager.time = 0.1f;
+						bombManager.isTimed = true;
+					}
 				}
 			}
+
 
 			/////////////////////////wood/steal
 			if (hitCollider.gameObject.tag == "Block") {
@@ -84,6 +95,10 @@ public class PhaseScript : MonoBehaviour {
 					bombNum++;
 				} else {
 					bomb.time = Mathf.Clamp(bomb.time+delta,0,10);
+				}
+				if (bomb.time >= 0.1f && !bomb.isTimed && timeBombNum > 0) { 
+					bomb.isTimed = true;
+					bombNum++; timeBombNum--;
 				}
 			}
 

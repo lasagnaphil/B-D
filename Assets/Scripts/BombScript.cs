@@ -11,6 +11,9 @@ public class BombScript : MonoBehaviour {
 	public Transform attachedBlock;
 	//private GameObject bombText;
 	public GUIStyle guiStyle;
+	public bool isTimed = false;
+	public Sprite bombImage;
+	public Sprite timeBombImage;
 
 	// Use this for initialization
 	void Start () {
@@ -25,8 +28,9 @@ public class BombScript : MonoBehaviour {
 	void OnGUI () {
 		Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint (Camera.main, transform.position);
 		screenPoint.y = Screen.height - screenPoint.y;
-		GUI.Label (new Rect (screenPoint.x-25, screenPoint.y-10, 50, 20), (Mathf.Round(10*time) / 10).ToString() + "s", guiStyle);
+		GUI.Label (new Rect (screenPoint.x-25, screenPoint.y+10, 50, 20), (Mathf.Round(10*time) / 10).ToString() + "s", guiStyle);
 	}
+
 	public void attach(Transform block) {
 		attachedBlock = block;
 		block.GetComponent<BlockScript> ().attachedBomb = transform;
@@ -35,7 +39,9 @@ public class BombScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		//bombText.GetComponent<Text> ().text = time.ToString () + "s";
+
+		GetComponent<SpriteRenderer>().sprite = (isTimed) ? timeBombImage : bombImage;
+
 		if (attachedBlock != null)
 			transform.position = attachedBlock.position;
 		else {
